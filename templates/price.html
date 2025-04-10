@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agro Nexus - Price Prediction</title>
-    <link rel="stylesheet" href="../public/stylesheets/price.css">
+    <link rel="stylesheet" href="/public/stylesheets/price.css">
 </head>
 <body>
     <div class="container">
@@ -14,16 +14,17 @@
         </header>
 
         <main>
-            <form id="predictionForm">
+            <form id="predictionForm" action="/predict_price" method="POST">
                 <div class="form-group">
                     <label for="crop">Select Crop</label>
                     <select id="crop" name="crop" required>
                         <option value="">Select a crop</option>
-                        <option value="wheat">Wheat</option>
-                        <option value="rice">Rice</option>
-                        <option value="corn">Corn</option>
-                        <option value="soybean">Soybean</option>
-                        <option value="cotton">Cotton</option>
+                        <option value="Wheat">Wheat</option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Maize">Maize</option>
+                        <option value="Jute">Jute</option>
+                        <option value="Gram">Gram</option>
+                        <option value="Moong">Moong</option>
                     </select>
                 </div>
 
@@ -55,12 +56,12 @@
             <div id="result" class="result-container">
                 <h2>Predicted Price</h2>
                 <div class="price-display">
-                    <span id="predictedPrice">₹0.00</span>
+                    <span id="predictedPrice">₹{{price}}</span>
                     <span class="unit">per kg</span>
                 </div>
             </div>
         </main>
     </div>
-    <script src="../public/scripts/price.js"></script>
+    <script src="/public/scripts/price.js"></script>
 </body>
 </html> 
