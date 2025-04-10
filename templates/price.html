@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Nexus - Price Prediction</title>
+    <link rel="stylesheet" href="../public/stylesheets/price.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AgroNexus Price Prediction</h1>
+            <p>Predict crop prices based on various factors</p>
+        </header>
+
+        <main>
+            <form id="predictionForm">
+                <div class="form-group">
+                    <label for="crop">Select Crop</label>
+                    <select id="crop" name="crop" required>
+                        <option value="">Select a crop</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="rice">Rice</option>
+                        <option value="corn">Corn</option>
+                        <option value="soybean">Soybean</option>
+                        <option value="cotton">Cotton</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rainfall">Rainfall (mm)</label>
+                    <input type="number" id="rainfall" name="rainfall" min="0" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <select id="city" name="city" required>
+                        <option value="">Select a city</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="chennai">Chennai</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="predict-btn">Predict Price</button>
+            </form>
+
+            <div id="result" class="result-container">
+                <h2>Predicted Price</h2>
+                <div class="price-display">
+                    <span id="predictedPrice">₹0.00</span>
+                    <span class="unit">per kg</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../public/scripts/price.js"></script>
+</body>
+</html> 
