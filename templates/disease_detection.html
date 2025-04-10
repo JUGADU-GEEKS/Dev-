@@ -2,125 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Agro Nexus - Crop Disease Detection</title>
-    <link rel="stylesheet" href="../public/stylesheets/disease_detection.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <title>Plant Disease Detector</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Agro Nexus Crop Disease Detection</h1>
-            <p>Detect potential diseases in your crops by uploading an image or providing a description</p>
-        </header>
+    <h2>Upload a leaf image to detect disease</h2>
+    <form method="POST" enctype="multipart/form-data" action="">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Predict</button>
+    </form>
 
-        <main>
-            <div class="detection-options">
-                <div class="option-tabs">
-                    <button class="tab-btn active" data-tab="image-upload">Upload Image</button>
-                    <button class="tab-btn" data-tab="text-description">Text Description</button>
-                </div>
-
-                <div id="image-upload" class="tab-content active">
-                    <form id="imageUploadForm">
-                        <div class="upload-container">
-                            <div class="upload-area" id="uploadArea">
-                                <img src="" alt="" id="previewImage" class="preview-image hidden">
-                                <div class="upload-instructions" id="uploadInstructions">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="17 8 12 3 7 8"></polyline>
-                                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                                    </svg>
-                                    <p>Drag & drop your crop image here<br>or click to browse</p>
-                                </div>
-                                <input type="file" id="imageInput" accept="image/*" class="file-input">
-                            </div>
-                            <button type="button" id="removeImage" class="remove-btn hidden">Remove Image</button>
-                        </div>
-                        <div class="form-group">
-                            <label for="cropType">Crop Type (Optional)</label>
-                            <select id="cropType" name="cropType">
-                                <option value="">Select crop type if known</option>
-                                <option value="wheat">Wheat</option>
-                                <option value="rice">Rice</option>
-                                <option value="corn">Corn</option>
-                                <option value="potato">Potato</option>
-                                <option value="tomato">Tomato</option>
-                                <option value="cotton">Cotton</option>
-                                <option value="soybean">Soybean</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="detect-btn">Detect Disease</button>
-                    </form>
-                </div>
-
-                <div id="text-description" class="tab-content">
-                    <form id="descriptionForm">
-                        <div class="form-group">
-                            <label for="cropType2">Crop Type</label>
-                            <select id="cropType2" name="cropType" required>
-                                <option value="">Select crop type</option>
-                                <option value="wheat">Wheat</option>
-                                <option value="rice">Rice</option>
-                                <option value="corn">Corn</option>
-                                <option value="potato">Potato</option>
-                                <option value="tomato">Tomato</option>
-                                <option value="cotton">Cotton</option>
-                                <option value="soybean">Soybean</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="symptoms">Observed Symptoms</label>
-                            <textarea id="symptoms" name="symptoms" rows="5" placeholder="Describe the symptoms in detail (e.g., yellow spots on leaves, wilting, etc.)" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="affectedParts">Affected Plant Parts</label>
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="affectedParts" value="leaves"> Leaves</label>
-                                <label><input type="checkbox" name="affectedParts" value="stem"> Stem</label>
-                                <label><input type="checkbox" name="affectedParts" value="fruit"> Fruit/Yield</label>
-                                <label><input type="checkbox" name="affectedParts" value="roots"> Roots</label>
-                                <label><input type="checkbox" name="affectedParts" value="flowers"> Flowers</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="spreadPattern">Spread Pattern</label>
-                            <select id="spreadPattern" name="spreadPattern">
-                                <option value="">Select if applicable</option>
-                                <option value="isolated">Isolated plants</option>
-                                <option value="patches">Patches/clusters</option>
-                                <option value="widespread">Widespread</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="detect-btn">Detect Disease</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="result" class="result-container hidden">
-                <h2>Detection Results</h2>
-                <div class="disease-display">
-                    <div class="disease-image">
-                        <img id="diseaseImage" src="" alt="Disease Example">
-                    </div>
-                    <div class="disease-info">
-                        <h3 id="diseaseName">Disease Name</h3>
-                        <p id="diseaseDescription">Disease description will appear here.</p>
-                        <div class="treatment-section">
-                            <h4>Recommended Treatment</h4>
-                            <ul id="treatmentList">
-                                <!-- Treatment recommendations will be populated here -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-    <script src="../public/scripts/disease_detection.js"></script>
+    {% if prediction %}
+        <h3>Prediction: {{ prediction }}</h3>
+        <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 300px;"/>
+    {% endif %}
 </body>
-</html> 
+</html>

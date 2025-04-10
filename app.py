@@ -8,6 +8,9 @@ from flask_cors import CORS
 import pickle
 import numpy as np
 from datetime import datetime
+import tensorflow as tf
+from PIL import Image
+import json
 
 
 #Importing models
@@ -178,6 +181,11 @@ def crop_rec():
         crop = crop_mapping[model7.predict(features)[0]]
         return render_template('crop_recom.html', crop=crop)
     return render_template('crop_recom.html', crop=crop)
+
+@app.route('/disease_detect', methods=['POST','GET'])
+def disease_detect():
+    if request.method=='POST':
+        img
 
 if __name__ == '__main__':
     app.run(debug=True) 
