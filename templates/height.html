@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Disease Detector</title>
+</head>
+<body>
+    <h2>Upload a leaf image to detect disease</h2>
+    <form method="POST" enctype="multipart/form-data" action="/height">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Predict</button>
+    </form>
+
+        <h3>Prediction: {{height}}</h3>
+        <img src="{{image}}" alt="">
+        
+       
+    
+</body>
+</html>

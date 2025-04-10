@@ -17,7 +17,7 @@ import json
 from io import BytesIO
 from tensorflow.keras.initializers import GlorotUniform, Zeros
 from tensorflow.keras.utils import get_custom_objects
-
+from plantheight import calculate_plant_height
 
 
 #Importing models
@@ -235,6 +235,20 @@ def disease_detect():
             print(prediction, predicted_label, confidence)
             return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
     return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
+
+@app.route('/height', methods=['GET', 'POST'])
+def height():
+    if request.method == 'POST':
+        file = request.files.get('image')
+        if not file:
+            return "No file uploaded"
+
+        result = calculate_plant_height(file)
+        if "error" in result:
+            return result["error"]
+
+        return render_template('height.html', height=result["height"], image=result["image_base64"])
+    return render_template('height.html')
 
 if __name__=='__main__':
     app.run(debug=True)
