@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Nexus - Sign In</title>
+    <link rel="stylesheet" href="../public/stylesheets/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="form-section">
+            <h1>Welcome Back</h1>
+            <h2>Sign in to your Agro Nexus account</h2>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <div class="input-field">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+                    <input type="email" placeholder="Enter your email" id="email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Password</label>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+                <div class="input-field">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <input type="password" placeholder="Enter your password" id="password">
+                    <span class="toggle-password" id="togglePassword">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            
+            <button class="btn" id="signInBtn">Sign In</button>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="/templates/signup.html">Sign Up</a>
+            </div>
+        </div>
+        
+        <div class="banner-section">
+            <svg class="leaf-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9c0 6 7 12 10 12s10-6 10-12c-3 0-4 0-9-1h11c0-6-7-10-10-10S2 3 2 9z"/></svg>
+            
+            <h3>Welcome to</h3>
+            <h1>AGRO NEXUS</h1>
+            
+            <div class="divider"></div>
+            
+            <p>Sign in to access your account and manage your agricultural needs efficiently and sustainably.</p>
+            
+            <div class="dot-indicators">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="copyright">© 2025 Agro Nexus. All rights reserved.</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordField = document.getElementById('password');
+            const signInBtn = document.getElementById('signInBtn');
+            const emailField = document.getElementById('email');
+            
+            // Password visibility toggle
+            togglePassword.addEventListener('click', function() {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                
+                // Toggle the eye icon
+                if (type === 'password') {
+                    togglePassword.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+                } else {
+                    togglePassword.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+                }
+            });
+            
+            // Input field focus effects
+            const inputFields = document.querySelectorAll('.input-field input');
+            inputFields.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.borderColor = '#6a762a';
+                    this.parentElement.style.boxShadow = '0 0 0 4px rgba(106, 118, 42, 0.15)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.borderColor = '#e0e3d8';
+                    this.parentElement.style.boxShadow = 'none';
+                });
+            });
+            
+            // Form validation with enhanced feedback
+            signInBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = emailField.value;
+                const password = passwordField.value;
+                let isValid = true;
+                
+                // Reset previous error states
+                emailField.parentElement.style.borderColor = '#e0e3d8';
+                passwordField.parentElement.style.borderColor = '#e0e3d8';
+                
+                if (!email) {
+                    emailField.parentElement.style.borderColor = '#d9534f';
+                    emailField.placeholder = 'Email is required';
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    emailField.parentElement.style.borderColor = '#d9534f';
+                    emailField.value = '';
+                    emailField.placeholder = 'Please enter a valid email';
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    passwordField.parentElement.style.borderColor = '#d9534f';
+                    passwordField.placeholder = 'Password is required';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    signInBtn.innerHTML = '<span>Signing in...</span>';
+                    signInBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        // For demo purposes - successful login
+                        signInBtn.innerHTML = 'Sign In';
+                        signInBtn.disabled = false;
+                        
+                        // Create success notification
+                        const notification = document.createElement('div');
+                        notification.style.position = 'fixed';
+                        notification.style.top = '20px';
+                        notification.style.left = '50%';
+                        notification.style.transform = 'translateX(-50%)';
+                        notification.style.backgroundColor = '#6a762a';
+                        notification.style.color = 'white';
+                        notification.style.padding = '10px 20px';
+                        notification.style.borderRadius = '4px';
+                        notification.style.zIndex = '1000';
+                        notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                        notification.textContent = 'Login successful! Welcome to Agro Nexus.';
+                        
+                        document.body.appendChild(notification);
+                        
+                        // Remove notification after 3 seconds
+                        setTimeout(() => {
+                            notification.style.opacity = '0';
+                            notification.style.transition = 'opacity 0.5s ease';
+                            setTimeout(() => {
+                                document.body.removeChild(notification);
+                            }, 500);
+                        }, 3000);
+                    }, 1500);
+                }
+            });
+            
+            // Email validation
+            function isValidEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+            
+            // Animated dots for banner slideshow
+            let currentDot = 0;
+            const dots = document.querySelectorAll('.dot');
+            
+            setInterval(() => {
+                dots[currentDot].classList.remove('active');
+                currentDot = (currentDot + 1) % dots.length;
+                dots[currentDot].classList.add('active');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
