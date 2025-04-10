@@ -62,9 +62,9 @@ def submit():
         supplement_name = supplement_info['supplement name'][pred]
         supplement_image_url = supplement_info['supplement image'][pred]
         supplement_buy_link = supplement_info['buy link'][pred]
-        return render_template('test.html', title=title, desc=description, prevent=prevent,
+        return render_template('disease.html', title=title, desc=description, prevent=prevent,
                                image_url=image_url, pred=pred, sname=supplement_name, simage=supplement_image_url, buy_link=supplement_buy_link)
-    return render_template('test.html')
+    return render_template('disease.html')
 
 
 if __name__ == '__main__':
