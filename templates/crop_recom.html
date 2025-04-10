@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Agro Nexus - Crop Recommendation</title>
+    <link rel="stylesheet" href="../public/stylesheets/crop_recom.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <style>
+        /* Background overlay for better visibility */
+        body:before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.35);
+            z-index: -1;
+        }
+        
+        /* Emergency override styles */
+        .input-row, .form-group, input, select, label {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        .form-group {
+            background-color: #ffffff;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #b2ac88;
+            border-radius: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 2px solid #6a762a;
+        }
+        .input-row {
+            margin-bottom: 15px;
+        }
+        @media (min-width: 768px) {
+            .input-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .form-group {
+                flex: 1;
+                min-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Agro Nexus Crop Recommendation</h1>
+            <p>Get personalized crop recommendations based on soil and weather parameters</p>
+        </header>
+
+        <main>
+            <form id="recommendationForm">
+                <h2 class="section-title">Soil Parameters</h2>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="nitrogen">Nitrogen (N) (kg/ha)</label>
+                        <input type="number" id="nitrogen" name="nitrogen" min="0" step="1" placeholder="Enter value" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phosphorus">Phosphorus (P) (kg/ha)</label>
+                        <input type="number" id="phosphorus" name="phosphorus" min="0" step="1" placeholder="Enter value" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="potassium">Potassium (K) (kg/ha)</label>
+                        <input type="number" id="potassium" name="potassium" min="0" step="1" placeholder="Enter value" required>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Weather Parameters</h2>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label for="temperature">Temperature (°C)</label>
+                        <input type="number" id="temperature" name="temperature" min="-50" max="60" step="0.1" placeholder="Enter value" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="humidity">Humidity (%)</label>
+                        <input type="number" id="humidity" name="humidity" min="0" max="100" step="0.1" placeholder="Enter value" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rainfall">Rainfall (mm)</label>
+                        <input type="number" id="rainfall" name="rainfall" min="0" step="0.1" placeholder="Enter value" required>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Soil pH</h2>
+                <div class="input-row">
+                    <div class="form-group full-width">
+                        <label for="ph">pH Level (Acidity/Alkalinity)</label>
+                        <div class="ph-container">
+                            <input type="range" id="ph" name="ph" min="0" max="14" step="0.1" value="7" required>
+                            <div class="ph-value">7.0</div>
+                            <div class="ph-scale">
+                                <span>Acidic</span>
+                                <span>Neutral</span>
+                                <span>Alkaline</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="recommend-btn">Get Recommendation</button>
+            </form>
+
+            <div id="result" class="result-container">
+                <h2>Recommended Crop</h2>
+                <div class="crop-display">
+                    <img id="cropImage" src="" alt="Crop">
+                    <span id="recommendedCrop"></span>
+                </div>
+                <div class="crop-details">
+                    <p id="cropDescription"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../public/scripts/crop_recom.js"></script>
+</body>
+</html> 
