@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../public/stylesheets/landingPage.css">
-    <link rel="stylesheet" href="../public/stylesheets/team.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/landingPage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/team.css') }}">
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Agro Nexus - AI Powered Crop Recommendations" />
     <meta property="og:description" content="Optimize your farming with AI-powered crop recommendations." />
     <meta property="og:type" content="website" />
 </head>
-
+{{ url_for('static', filename='stylesheets
 <body>
   <div id="root">
     <!-- Background Animations -->
@@ -200,6 +200,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="../public/scripts/landingPage.js"></script>
+    <script src="{{ url_for('static', filename='scripts/landingPage.js') }}"></script>
+
   </body>
 </html>

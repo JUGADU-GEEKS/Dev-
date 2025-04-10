@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kisan Smart Kheti - Problem Solutions</title>
     <meta name="description" content="Smart Solutions for Indian Farmers" />
-    <link rel="stylesheet" href="../public/stylesheets/problems.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/problems.css') }}">
   </head>
   <body>
     <header class="header">
@@ -244,6 +244,7 @@
       </div>
     </footer>
 
-    <script src="../public/scripts/problems.js"></script>
+    <script src="{{ url_for('static', filename='scripts/problems.js') }}"></script>
+
   </body>
 </html>

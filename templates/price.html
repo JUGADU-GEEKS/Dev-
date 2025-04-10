@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agro Nexus - Price Prediction</title>
-    <link rel="stylesheet" href="/public/stylesheets/price.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/price.css') }}">
 </head>
 <body>
     <div class="container">
@@ -62,6 +62,7 @@
             </div>
         </main>
     </div>
-    <script src="/public/scripts/price.js"></script>
+    <script src="{{ url_for('static', filename='scripts/price.js') }}"></script>
+
 </body>
 </html> 
