@@ -1,0 +1,6 @@
+.transparent-navbar .logo:hover {
+    text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
+    color: #00ffe1;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
