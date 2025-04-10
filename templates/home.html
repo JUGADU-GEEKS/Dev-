@@ -1,133 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/public/components/homeAnimation.css">
-    <link rel="stylesheet" href="/public/stylesheets/home.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FarmInsight - Weather Dashboard</title>
+  <link rel="stylesheet" href="/public/stylesheets/home.css">
 </head>
 <body>
-    <div class="navbar transparent-navbar">
-        <div class="logo">AgroAssist 🌾</div>
-        <ul class="nav-links">
-            <li><a href="#recommendation">Crop Recommendation</a></li>
-            <li><a href="#price">Price Predictor</a></li>
-            <li><a href="#disease">Disease Detection</a></li>
-            <li><a href="#growth">Crop Growth</a></li>
-        </ul>
+  <div class="clouds"></div>
+  <header>
+    <h1>FarmInsight</h1>
+    <nav>
+      <a href="#">Crop Price Predictor</a>
+      <a href="#">Crop Recommendation</a>
+      <a href="#">Disease Detection</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="chart-box">
+      <h2>Temperature (Last 5 Days)</h2>
+      <canvas id="tempChart"></canvas>
     </div>
-    
-    <div class="main">
-        <p class="indicator">
-            <span>Scroll</span>
-            <span>↓</span>
-        </p>
-        
-        <div class="fish-wrapper">
-            <div class="fish">
-                <div class="fish__skeleton"></div>
-                <div class="fish__inner">
-                    <div class="fish__body"></div>
-                    <div class="fish__body"></div>
-                    <div class="fish__body"></div>
-                    <div class="fish__body"></div>
-        
-                    <div class="fish__head"></div>
-                    <div class="fish__head fish__head--2"></div>
-                    <div class="fish__head fish__head--3"></div>
-                    <div class="fish__head fish__head--4"></div>
-        
-                    <div class="fish__tail-main"></div>
-                    <div class="fish__tail-fork"></div>
-        
-                    <div class="fish__fin"></div>
-                    <div class="fish__fin fish__fin--2"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="bubbles">
-            <div class="bubbles__inner">
-                <div class="bubbles__bubble"></div>
-                <div class="bubbles__bubble"></div>
-                <div class="bubbles__bubble"></div>
-            </div>
-        </div>
-        
-        <div class="rays"><div data-rays></div></div>
-        
-        <div class="lights">
-            <div class="lights__group" data-lights="1">
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-                <div class="lights__light"></div>
-            </div>
-        </div>
-        
-        <div class="content">
-            <section>
-                <div class="section__content">
-                    <p>In the deepest ocean</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>the bottom of the sea</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>Your eyes...</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>they turn me...</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>turn me on to phantoms</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>I follow to the edge of the earth</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>and fall off</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>I get eaten by the worms</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>and weird fishes</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>Hit the bottom and escape</p>
-                </div>
-            </section>
-            <section>
-                <div class="section__content">
-                    <p>escape</p>
-                </div>
-            </section>
-        </div>
+    <div class="chart-box">
+      <h2>Humidity (Last 5 Days)</h2>
+    <canvas id="humidityChart"></canvas>
     </div>
-    <script type="module" src="/public/components/homeAnimation.js"></script>
+    <div class="chart-box">
+      <h2>Rainfall (Last 5 Days)</h2>
+      <canvas id="rainChart"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/public/components/homeGraphs.js"></script>
 </body>
 </html>

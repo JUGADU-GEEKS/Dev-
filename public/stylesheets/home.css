@@ -1,6 +1,96 @@
-.transparent-navbar .logo:hover {
-    text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
-    color: #00ffe1;
-    transition: 0.4s ease;
-    cursor: pointer;
-}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #b2ac88, #6a762a);
+    overflow-x: hidden;
+  }
+
+  .clouds {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/U5BpM9T.png') repeat-x;
+    animation: moveClouds 60s linear infinite;
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  @keyframes moveClouds {
+    from { background-position: 0 0; }
+    to { background-position: 10000px 0; }
+  }
+
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 1s ease-in-out;
+  }
+
+  header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 2rem;
+  }
+
+  nav a {
+    color: white;
+    margin-left: 2rem;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease-in-out;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  @keyframes slideIn {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .chart-box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
