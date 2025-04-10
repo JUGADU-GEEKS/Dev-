@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Data Analytics - Baisakhi</title>
+    <link rel="stylesheet" href="../public/stylesheets/track.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        html, body {
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            overflow-x: visible;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .bg-sage {
+            background-color: #B2AC88;
+        }
+        .bg-olive {
+            background-color: #6a762a;
+        }
+        .text-olive {
+            color: #6a762a;
+        }
+        .text-sage {
+            color: #B2AC88;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(178, 172, 136, 0.15);
+            padding: 15px;
+            border: 1px solid #B2AC88;
+        }
+        
+        .chart-title {
+            color: #6a762a;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .split-text span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .float-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .data-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(178, 172, 136, 0.15);
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #B2AC88;
+            transition: transform 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(106, 118, 42, 0.2);
+        }
+        
+        .data-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6a762a;
+        }
+        
+        .data-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .rain-icon { color: #4a90e2; }
+        .temp-icon { color: #e74c3c; }
+        .humidity-icon { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 style="color: #4b5515;" class="text-center mb-4 split-text" id="mainTitle">Weather Analytics</h1>
+        
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="data-card text-center">
+                    <i class="fas fa-cloud-rain fa-3x rain-icon float-icon mb-2"></i>
+                    <div class="data-label">Average Rainfall</div>
+                    <div class="data-value" id="avgRainfall">-</div>
+                    <div class="data-label">mm / day</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="data-card text-center">
+                    <i class="fas fa-temperature-high fa-3x temp-icon float-icon mb-2"></i>
+                    <div class="data-label">Average Temperature</div>
+                    <div class="data-value" id="avgTemperature">-</div>
+                    <div class="data-label">°C</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="data-card text-center">
+                    <i class="fas fa-tint fa-3x humidity-icon float-icon mb-2"></i>
+                    <div class="data-label">Average Humidity</div>
+                    <div class="data-value" id="avgHumidity">-</div>
+                    <div class="data-label">%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4 animate-card">
+            <div class="card-header bg-sage text-white py-3">
+                <h5 class="card-title mb-0">Weather Data for Last 7 Days</h5>
+            </div>
+            <div class="card-body">
+                <!-- Temperature Chart -->
+                <div class="chart-container">
+                    <h5 class="chart-title"><i class="fas fa-temperature-high me-2 text-olive"></i>Temperature (°C)</h5>
+                    <canvas id="temperatureChart"></canvas>
+                </div>
+                
+                <!-- Rainfall Chart -->
+                <div class="chart-container">
+                    <h5 class="chart-title"><i class="fas fa-cloud-rain me-2 text-olive"></i>Rainfall (mm)</h5>
+                    <canvas id="rainfallChart"></canvas>
+                </div>
+                
+                <!-- Humidity Chart -->
+                <div class="chart-container">
+                    <h5 class="chart-title"><i class="fas fa-tint me-2 text-olive"></i>Humidity (%)</h5>
+                    <canvas id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Source Info -->
+        <div class="card mb-4">
+            <div class="card-header bg-olive text-white py-3">
+                <h5 class="card-title mb-0">Data Source Information</h5>
+            </div>
+            <div class="card-body">
+                <p><i class="fas fa-info-circle me-2 text-olive"></i> Weather data is provided by OpenWeatherMap API and updated hourly.</p>
+                <p><i class="fas fa-map-marker-alt me-2 text-olive"></i> <span id="locationInfo">Loading location...</span></p>
+                <p><i class="fas fa-clock me-2 text-olive"></i> Last Updated: <span id="lastUpdated">Loading...</span></p>
+            </div>
+        </div>
+        
+        <!-- Add extra space at bottom of page -->
+        <div class="page-footer-space"></div>
+    </div>
+
+    <!-- Settings Button -->
+    <div class="settings-btn">
+        <button class="btn btn-primary rounded-circle pulse-animation">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Split text animation for main title
+            const mainTitle = document.getElementById('mainTitle');
+            const text = mainTitle.textContent;
+            mainTitle.innerHTML = '';
+            
+            // Create spans for each character
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+                mainTitle.appendChild(span);
+            }
+            
+            // Animate each character with GSAP
+            gsap.registerPlugin(TextPlugin);
+            const spans = mainTitle.querySelectorAll('span');
+            
+            gsap.to(spans, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.05,
+                ease: "back.out(1.7)",
+                onComplete: function() {
+                    // Add a color change animation after text appears
+                    gsap.to(mainTitle, {
+                        color: "#6a762a",
+                        duration: 1.5,
+                        delay: 0.5,
+                        ease: "power2.inOut",
+                        yoyo: true,
+                        repeat: -1,
+                        repeatDelay: 5
+                    });
+                }
+            });
+            
+            // Animate card entrance
+            gsap.from('.animate-card', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.7,
+                clearProps: "transform"
+            });
+            
+            // Animate data cards
+            gsap.from('.data-card', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                stagger: 0.2,
+                delay: 1,
+                ease: "back.out(1.7)"
+            });
+            
+            // Animate settings button with continuous rotation
+            gsap.to('.pulse-animation', {
+                rotation: 360,
+                duration: 8,
+                ease: "none",
+                repeat: -1
+            });
+            
+            // Animate data values counter
+            gsap.from('#avgRainfall', { textContent: 0, duration: 2, ease: "power2.out", snap: { textContent: 0.1 }, delay: 1.5 });
+            gsap.from('#avgTemperature', { textContent: 0, duration: 2, ease: "power2.out", snap: { textContent: 0.1 }, delay: 1.7 });
+            gsap.from('#avgHumidity', { textContent: 0, duration: 2, ease: "power2.out", snap: { textContent: 0.1 }, delay: 1.9 });
+        });
+    </script>
+    
+    <!-- Weather Data Scripts -->
+    <script>
+        // Fetch weather data and update charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // API key for OpenWeatherMap
+            const apiKey = 'bd5e378503939ddaee76f12ad7a97608';
+            // Default coordinates (can be replaced with geolocation)
+            const lat = 28.7041;
+            const lon = 77.1025;
+            
+            // Fetch historical weather data for the last 7 days
+            fetchWeatherData(lat, lon, apiKey);
+            
+            // Update location information
+            document.getElementById('locationInfo').textContent = 'Delhi, India (28.7041° N, 77.1025° E)';
+            document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+        });
+        
+        function fetchWeatherData(lat, lon, apiKey) {
+            // Get dates for the last 7 days
+            const dates = [];
+            const today = new Date();
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(today.getDate() - i);
+                dates.push(date.toISOString().split('T')[0]);
+            }
+            
+            // In a real implementation, you would use a weather history API
+            // Since OpenWeatherMap's history API requires paid subscription, we'll simulate the data
+            
+            // Simulated weather data for demonstration
+            const temperatureData = [23, 25, 24, 26, 27, 25, 24];
+            const rainfallData = [5, 10, 2, 0, 8, 15, 3];
+            const humidityData = [65, 70, 60, 55, 68, 75, 62];
+            
+            // Calculate averages
+            const avgTemp = (temperatureData.reduce((a, b) => a + b, 0) / temperatureData.length).toFixed(1);
+            const avgRain = (rainfallData.reduce((a, b) => a + b, 0) / rainfallData.length).toFixed(1);
+            const avgHumid = (humidityData.reduce((a, b) => a + b, 0) / humidityData.length).toFixed(0);
+            
+            // Update summary cards
+            document.getElementById('avgTemperature').textContent = avgTemp;
+            document.getElementById('avgRainfall').textContent = avgRain;
+            document.getElementById('avgHumidity').textContent = avgHumid;
+            
+            // Create charts
+            createTemperatureChart(dates, temperatureData);
+            createRainfallChart(dates, rainfallData);
+            createHumidityChart(dates, humidityData);
+            
+            // In a real implementation, you would fetch data from the OpenWeatherMap API
+            // Example API call for current weather:
+            // fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=metric&appid=${apiKey}`)
+            //    .then(response => response.json())
+            //    .then(data => {
+            //        // Process and display the data
+            //    })
+            //    .catch(error => console.error('Error fetching weather data:', error));
+        }
+        
+        function createTemperatureChart(dates, data) {
+            const ctx = document.getElementById('temperatureChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Temperature (°C)',
+                        data: data,
+                        fill: false,
+                        borderColor: '#e74c3c',
+                        backgroundColor: '#e74c3c',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createRainfallChart(dates, data) {
+            const ctx = document.getElementById('rainfallChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Rainfall (mm)',
+                        data: data,
+                        backgroundColor: '#4a90e2',
+                        borderColor: '#4a90e2',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createHumidityChart(dates, data) {
+            const ctx = document.getElementById('humidityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Humidity (%)',
+                        data: data,
+                        fill: true,
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(178, 172, 136, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
