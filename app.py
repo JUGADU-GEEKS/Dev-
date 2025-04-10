@@ -7,10 +7,17 @@ import re
 from flask_cors import CORS
 import pickle
 import numpy as np
+import matplotlib.pylab as plt
+from skimage.transform import resize
 from datetime import datetime
-import tensorflow as tf
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 from PIL import Image
 import json
+from io import BytesIO
+from tensorflow.keras.initializers import GlorotUniform, Zeros
+from tensorflow.keras.utils import get_custom_objects
+
 
 
 #Importing models
@@ -26,10 +33,17 @@ with open('models/Maize_price_prediction.pkl', 'rb') as Maize:
     model5 = pickle.load(Maize)
 with open('models/Moong_price_prediction.pkl', 'rb') as Moong:
     model6 = pickle.load(Moong)
-
 with open('models/Crop_Recommendation.pkl', 'rb') as cr:
     model7 = pickle.load(cr)
+# Load model and categories
+model = load_model("models/plant_disease_detection.h5")
+with open("categories.json") as f:
+    categories = json.load(f)
+labels = list(categories.keys())
 
+
+# Image size used during training
+IMAGE_SIZE = (224, 224)
 
 # Load environment variables
 load_dotenv()
@@ -37,6 +51,8 @@ load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+
+# Custom deserialization workaround
 
 
 # MongoDB connection
@@ -184,8 +200,23 @@ def crop_rec():
 
 @app.route('/disease_detect', methods=['POST','GET'])
 def disease_detect():
+    predicted_label=None
+    confidence=None
     if request.method=='POST':
-        img
+        file = request.files['image']
+        if file:
+            # Read image in-memory
+            img = Image.open(BytesIO(file.read())).convert("RGB")
+            img = img.resize(IMAGE_SIZE)
+            img_array = image.img_to_array(img)
+            img_array = np.expand_dims(img_array, axis=0) / 255.0
 
-if __name__ == '__main__':
-    app.run(debug=True) 
+            prediction = model.predict(img_array)[0]
+            predicted_label = labels[np.argmax(prediction)]
+            confidence = round(100 * np.max(prediction), 2)
+            print(prediction, predicted_label, confidence)
+            return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
+    return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
+
+if __name__=='__main__':
+    app.run(debug=True)

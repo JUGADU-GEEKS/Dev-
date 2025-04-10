@@ -6,14 +6,13 @@
 </head>
 <body>
     <h2>Upload a leaf image to detect disease</h2>
-    <form method="POST" enctype="multipart/form-data" action="">
+    <form method="POST" enctype="multipart/form-data" action="/disease_detect">
         <input type="file" name="image" accept="image/*" required>
         <button type="submit">Predict</button>
     </form>
 
-    {% if prediction %}
-        <h3>Prediction: {{ prediction }}</h3>
-        <img src="{{ image_path }}" alt="Uploaded Image" style="max-width: 300px;"/>
-    {% endif %}
+        <h3>Prediction: {{disease}}, {{accuracy_score}}</h3>
+       
+    
 </body>
 </html>
