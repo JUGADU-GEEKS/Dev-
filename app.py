@@ -44,7 +44,25 @@ client = MongoClient(os.getenv('MONGO_URI'))
 db = client['AgroNexus']
 users_collection = db['users']
 
-@app.route('/signup', methods=['POST'])
+# Page Routes
+@app.route('/')
+def landing():
+    return render_template('landingPage.html')
+
+@app.route('/signup')
+def signup_page():
+    return render_template('signup.html')
+
+@app.route('/login')
+def login_page():
+    return render_template('login.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+# API Routes
+@app.route('/api/signup', methods=['POST'])
 def signup():
     try:
         data = request.get_json()
@@ -87,7 +105,7 @@ def signup():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     try:
         data = request.get_json()
