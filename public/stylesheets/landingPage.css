@@ -257,7 +257,9 @@
   color: var(--dark-gray);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
 }
-
+.hero-content span {
+  color: var(--olive);
+}
 .hero-content p {
   font-size: 1.3rem;
   margin-bottom: 30px;
