@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             signUpBtn.disabled = true;
             
             // Make API call to backend
-            fetch('http://localhost:5000/signup', {
+            fetch('http://localhost:5000/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         document.body.removeChild(notification);
                         // Redirect to home page after successful signup
-                        window.location.href = '/templates/home.html';
+                        window.location.href = '/home';
                     }, 500);
                 }, 3000);
             })

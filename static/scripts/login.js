@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             signInBtn.disabled = true;
             
             // Make API call to backend
-            fetch('http://localhost:5000/login', {
+            fetch('http://localhost:5000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         document.body.removeChild(notification);
                         // Redirect to home page
-                        window.location.href = '/templates/home.html';
+                        window.location.href = '/home';
                     }, 500);
                 }, 2000);
             })

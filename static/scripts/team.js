@@ -2,31 +2,31 @@
 const teamMembers = [
     {
         name: "Kunal Sharma",
-        image: "../public/images/kunal.png",
+        image: "../static/images/kunal.png",
         github: "https://github.com/KunnuSherry",
         linkedin: "https://www.linkedin.com/in/kunal-sharma-8b9787334/"
     },
     {
       name: "Dhruv Sharma",
-      image: "../public/images/dhruv.jpg",
+      image: "../static/images/dhruv.jpg",
       github: "https://github.com/dhruv0050",
       linkedin: "https://www.linkedin.com/in/dhruv-sharma-331379154/"
     },
     {
         name: "Sangya Ojha",
-        image: "../public/images/sangya.png",
+        image: "../static/images/sangya.png",
         github: "https://github.com/sangya-25",
         linkedin: "https://www.linkedin.com/in/sangya-ojha-7a58a22a3/"
     },
     {
       name: "Devang Singh",
-      image: "../public/images/devang.jpg",
+      image: "../static/images/devang.jpg",
       github: "https://github.com/devang9890",
       linkedin: "https://www.linkedin.com/in/devang-singh-258476284/"
     },
     {
       name: "Aashi Goel",
-      image: "../public/images/aashi.png",
+      image: "../static/images/aashi.png",
       github: "https://github.com/Aashi-25",
       linkedin: "https://www.linkedin.com/in/aashi-goel-041512295/"
     }
