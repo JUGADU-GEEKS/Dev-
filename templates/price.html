@@ -5,8 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agro Nexus - Price Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/price.css') }}">
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+        }
+    
+        .navbar {
+          background-color: #9C9777;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 24px;
+        }
+    
+        .navbar .logo {
+          font-size: 20px;
+          font-weight: bold;
+          color: white;
+          text-decoration: none;
+        }
+    
+        .navbar .nav-links {
+          display: flex;
+          gap: 20px;
+        }
+    
+        .navbar .nav-links a {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          transition: color 0.3s;
+        }
+    
+        .navbar .nav-links a:hover {
+          color: #333;
+        }
+      </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="#" class="logo">AgroNexus</a>
+        <div class="nav-links">
+          <a href="/predict_price">Crop Price Predictor</a>
+          <a href="/crop_rec">Crop Recommendation</a>
+          <a href="/submit">Disease Detection</a>
+          <a href="/height">Height Tracker</a>
+        </div>
+      </div>
+    
     <div class="container">
         <header>
             <h1>AgroNexus Price Prediction</h1>
