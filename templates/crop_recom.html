@@ -42,6 +42,37 @@
         .input-row {
             margin-bottom: 15px;
         }
+        .navbar {
+          background-color: #9C9777;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 24px;
+          /* margin-top: 0; */
+        }
+    
+        .navbar .logo {
+          font-size: 20px;
+          font-weight: bold;
+          color: white;
+          text-decoration: none;
+        }
+    
+        .navbar .nav-links {
+          display: flex;
+          gap: 20px;
+        }
+    
+        .navbar .nav-links a {
+          color: white;
+          text-decoration: none;
+          font-size: 16px;
+          transition: color 0.3s;
+        }
+    
+        .navbar .nav-links a:hover {
+          color: #333;
+        }
         @media (min-width: 768px) {
             .input-row {
                 display: flex;
@@ -54,8 +85,18 @@
             }
         }
     </style>
+     
 </head>
 <body>
+    <div class="navbar">
+        <a href="#" class="logo">AgroNexus</a>
+        <div class="nav-links">
+          <a href="/predict_price">Crop Price Predictor</a>
+          <a href="/crop_rec">Crop Recommendation</a>
+          <a href="/submit">Disease Detection</a>
+          <a href="/height">Height Tracker</a>
+        </div>
+      </div>
     <div class="container">
         <header>
             <h1>Agro Nexus Crop Recommendation</h1>
