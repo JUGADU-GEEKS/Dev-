@@ -1,26 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AgroNexus</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home.css') }}">
+  <link rel="stylesheet" href="/static/components/homeAnimation.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #9C9777;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #333;
+    }
+  </style>
 </head>
+
 <body>
   <div id="clouds" class="clouds"></div>
-  
-  <header class="farm-header">
-    <div class="container">
-      <div class="header-content">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-          <path d="M7 20.59V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13.59"></path><path d="M2 20h20"></path><path d="M12 10.5V17"></path><path d="M10 13h4"></path>
-        </svg>
-        <h1 class="farm-logo">AgroNexus</h1>
+
+  <div class="navbar">
+    <a href="#" class="logo">AgroNexus</a>
+    <div class="nav-links">
+      <a href="/predict_price">Crop Price Predictor</a>
+      <a href="/crop_rec">Crop Recommendation</a>
+      <a href="#">Disease Detection</a>
+      <a href="/height">Height Tracker</a>
+    </div>
+  </div>
+  <main>
+    <div class="hero">
+      <div class="slider">
+        <button class="slider--btn slider--btn__prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div class="slides__wrapper">
+          <div class="slides">
+            <!-- slide 1 -->
+            <div class="slide" data-current>
+              <div class="slide__inner">
+                <div class="slide--image__wrapper">
+                  <img class="slide--image" src="/static/images/bpit.webp" alt="Image 1" />
+                </div>
+              </div>
+            </div>
+            <div class="slide__bg"
+              style="--bg: url(https://devloop01.github.io/voyage-slider/images/scotland-mountains.jpg); --dir: 0"
+              data-current></div>
+
+            <!-- slide 2 -->
+            <div class="slide" data-next>
+              <div class="slide__inner">
+                <div class="slide--image__wrapper">
+                  <img class="slide--image" src="/static/images/money.jpg" alt="Image 2" />
+                </div>
+              </div>
+            </div>
+            <div class="slide__bg"
+              style="--bg: url(https://devloop01.github.io/voyage-slider/images/machu-pichu.jpg); --dir: 1" data-next>
+            </div>
+
+            <!-- slide 3 -->
+            <div class="slide" data-previous>
+              <div class="slide__inner">
+                <div class="slide--image__wrapper">
+                  <img class="slide--image" src="/static/images/sus.jpg" alt="Image 3" />
+                </div>
+              </div>
+            </div>
+            <div class="slide__bg"
+              style="--bg: url(https://devloop01.github.io/voyage-slider/images/chamonix.jpg); --dir: -1" data-previous>
+            </div>
+          </div>
+          <div class="slides--infos">
+            <!-- Slide Info 1 -->
+            <div class="slide-info" data-current>
+              <div class="slide-info__inner">
+                <div class="slide-info--text__wrapper">
+                  <div data-title class="slide-info--text">
+                    <span>Campus Groups</span>
+                  </div>
+                  <div data-subtitle class="slide-info--text">
+                    <span>Gathering</span>
+                  </div>
+                  <div data-description class="slide-info--text">
+                    <span> Diverse groups of students helping each other</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide Info 2 -->
+            <div class="slide-info" data-next>
+              <div class="slide-info__inner">
+                <div class="slide-info--text__wrapper">
+                  <div data-title class="slide-info--text">
+                    <span>Money-Saving</span>
+                  </div>
+                  <div data-subtitle class="slide-info--text">
+                    <span>Cheap Deals</span>
+                  </div>
+                  <div data-description class="slide-info--text">
+                    <span>Save a Lot of Money</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide Info 3 -->
+            <div class="slide-info" data-previous>
+              <div class="slide-info__inner">
+                <div class="slide-info--text__wrapper">
+                  <div data-title class="slide-info--text">
+                    <span>Sustainablity</span>
+                  </div>
+                  <div data-subtitle class="slide-info--text">
+                    <span>Reduce Waste</span>
+                  </div>
+                  <div data-description class="slide-info--text">
+                    <span>Reusing the used equipments</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="slider--btn slider--btn__next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="loader">
+        <span class="loader__text">0%</span>
       </div>
     </div>
-  </header>
-  
+  </main>
+
+  </div>
   <div class="main-container">
     <div class="content-column">
       <div class="farm-tools-card">
@@ -29,27 +184,49 @@
           <p>Access powerful tools to optimize your farm operations</p>
         </div>
         <div class="card-content">
-          <button class="tool-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline>
-            </svg>
-            <span>Crop Price Predictor</span>
-          </button>
-          <button class="tool-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="M7 20.59V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13.59"></path><path d="M2 20h20"></path><path d="M12 10.5V17"></path><path d="M10 13h4"></path>
-            </svg>
-            <span>Crop Recommendation</span>
-          </button>
-          <button class="tool-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-              <path d="m18 5-3-3H7L4 5"></path><path d="M18 5v14l-3 3H7l-3-3V5"></path><path d="M11.5 19a.5.5 0 0 0-.5.5"></path><path d="M11.5 5a.5.5 0 0 1-.5-.5"></path><path d="M11.5 7a.5.5 0 0 1-.5.5"></path><path d="M11.5 9a.5.5 0 0 0-.5.5"></path><path d="M11.5 11a.5.5 0 0 1-.5.5"></path><path d="M11.5 13a.5.5 0 0 0-.5.5"></path><path d="M11.5 15a.5.5 0 0 1-.5.5"></path><path d="M11.5 17a.5.5 0 0 0-.5.5"></path>
-            </svg>
-            <span>Disease Detection</span>
-          </button>
+          <a href="/predict_price"><button class="tool-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                <polyline points="16 7 22 7 22 13"></polyline>
+              </svg>
+              <span>Crop Price Predictor</span>
+            </button></a>
+          <a href="/crop_rec"><button class="tool-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M7 20.59V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13.59"></path>
+                <path d="M2 20h20"></path>
+                <path d="M12 10.5V17"></path>
+                <path d="M10 13h4"></path>
+              </svg>
+              <span>Crop Recommendation</span>
+            </button></a>
+          <a href="/disease_detection"><button class="tool-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="m18 5-3-3H7L4 5"></path>
+                <path d="M18 5v14l-3 3H7l-3-3V5"></path>
+                <path d="M11.5 19a.5.5 0 0 0-.5.5"></path>
+                <path d="M11.5 5a.5.5 0 0 1-.5-.5"></path>
+                <path d="M11.5 7a.5.5 0 0 1-.5.5"></path>
+                <path d="M11.5 9a.5.5 0 0 0-.5.5"></path>
+                <path d="M11.5 11a.5.5 0 0 1-.5.5"></path>
+                <path d="M11.5 13a.5.5 0 0 0-.5.5"></path>
+                <path d="M11.5 15a.5.5 0 0 1-.5.5"></path>
+                <path d="M11.5 17a.5.5 0 0 0-.5.5"></path>
+              </svg>
+              <span>Disease Detection</span>
+            </button></a>
+          <a href="/height"><button class="tool-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+              </svg>
+              <span>Height Tracker</span>
+            </button></a>
         </div>
       </div>
-      
+
       <div class="statistics-section">
         <h2>Today's Statistics</h2>
         <p>Weather data for the last 5 days</p>
@@ -70,10 +247,12 @@
       </div>
     </div>
   </div>
-  
+
   <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
   <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   <script src="{{ url_for('static', filename='components/homeGraphs.js') }}"></script>
+  <script type="module" src="/static/components/homeAnimation.js"></script>
   <!-- <script src="{{ url_for('static', filename='scripts/home.js') }}"></script> -->
 </body>
+
 </html>
