@@ -342,7 +342,7 @@ input[type="range"]:active::-webkit-slider-thumb {
     background-color: var(--sage);
     border-radius: 5px;
     text-align: center;
-    display: none;
+    /* display: none; */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     will-change: transform, opacity;
     transition: all 0.3s ease;
