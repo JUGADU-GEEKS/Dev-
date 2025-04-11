@@ -23,11 +23,11 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
+/* body {
   background: linear-gradient(to bottom right, #ffffff, rgba(178, 172, 136, 0.1));
   color: var(--text-dark);
   min-height: 100vh;
-}
+} */
 
 .container {
   width: 100%;
