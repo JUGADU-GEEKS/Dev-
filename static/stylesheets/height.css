@@ -1,0 +1,163 @@
+:root {
+    --sage: #B2AC88;
+    --olive: #6A762A;
+    --light-sage: #D2CFBB;
+    --white-transparent: rgba(255, 255, 255, 0.25);
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, var(--sage), var(--olive));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    color: white;
+  }
+  
+  .clouds {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/U5BpM9T.png') repeat-x;
+    animation: moveClouds 60s linear infinite;
+    opacity: 0.15;
+    z-index: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  @keyframes moveClouds {
+    from { background-position: 0 0; }
+    to { background-position: 10000px 0; }
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+  }
+  
+  form {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    cursor: pointer;
+  }
+  
+  input[type="file"]::file-selector-button {
+    background: var(--white-transparent);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="file"]::file-selector-button:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  
+  button[type="submit"] {
+    background: var(--olive);
+    border: none;
+    color: white;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    align-self: center;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  button[type="submit"]:hover {
+    background: #7d8930;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  button[type="submit"]:active {
+    transform: translateY(0);
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+    max-height: 500px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+  }
+  
+  .result-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (max-width: 600px) {
+    form, .result-container {
+      padding: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
