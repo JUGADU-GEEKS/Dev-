@@ -233,8 +233,8 @@ def disease_detect():
             predicted_label = labels[np.argmax(prediction)]
             confidence = round(100 * np.max(prediction), 2)
             print(prediction, predicted_label, confidence)
-            return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
-    return render_template('disease_detection.html', disease=predicted_label, accuracy_score=confidence)
+            return render_template('disease.html', disease=predicted_label, accuracy_score=confidence)
+    return render_template('disease.html', disease=predicted_label, accuracy_score=confidence)
 
 @app.route('/height', methods=['GET', 'POST'])
 def height():

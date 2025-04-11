@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,5 +21,64 @@
         {{buy_link}}
        
     
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/disease.css') }}">
+</head>
+<body>
+    <div class="clouds"></div>
+    
+    <div class="container">
+        <h2>Upload a leaf image to detect disease</h2>
+        
+        <form method="POST" enctype="multipart/form-data" action="/submit">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if title %}
+        <div class="results-container">
+            <div class="disease-info">
+                <h3>Prediction: {{title}}</h3>
+                
+                <div class="description">
+                    <h4>Description</h4>
+                    <p>{{desc}}</p>
+                </div>
+                
+                <div class="prevention">
+                    <h4>Prevention Methods</h4>
+                    <p>{{prevent}}</p>
+                </div>
+            </div>
+            
+            <div class="uploaded-image">
+                <h4>Your Plant Image</h4>
+                <div class="image-container">
+                    <img src="{{image_url}}" alt="Uploaded plant image">
+                </div>
+                <div class="confidence">
+                    Confidence: {{pred}}
+                </div>
+            </div>
+            
+            <div class="solution-info">
+                <h4>Recommended Solution</h4>
+                <div class="solution-product">
+                    <h4>{{sname}}</h4>
+                    <img src="{{simage}}" alt="Solution product" class="product-image">
+                    <a href="{{buy_link}}" class="buy-button" target="_blank">Purchase Solution</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
