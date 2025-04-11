@@ -51,7 +51,7 @@ def submit():
     if request.method == 'POST':
         image = request.files['image']
         filename = image.filename
-        file_path = os.path.join('public','uploads', filename)
+        file_path = os.path.join('static','uploads', filename)
         image.save(file_path)
         print(file_path)
         pred = predict(file_path)  # Call the predict function here
